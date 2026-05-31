@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     std::cout << "empty? " << (list.empty() ? "true" : "false") << " size=" << list.size() << "\n";
 
     for (int i = 0; i < 10; i++) {
-        list.push_back(std::to_string(i));
+        list.push_back(std::to_string(i)); 
     }
     std::cout << "after push_back 0-9\n";
     print_list(list);
