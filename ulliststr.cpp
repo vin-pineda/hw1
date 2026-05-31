@@ -24,8 +24,6 @@ size_t ULListStr::size() const
   return size_;
 }
 
-// WRITE YOUR CODE HERE
-
 void ULListStr::push_back(const std::string& val)
 {
   if (empty()) {
