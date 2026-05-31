@@ -16,25 +16,23 @@ the function below should be the only one in this file.
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-   if (in == nullptr) {
-      odds = nullptr;
-      evens = nullptr;
-      return;
+   if (in == nullptr){
+    odds = nullptr;
+    evens = nullptr;
+    return;
    }
 
-   Node * curr = in;
-   if (curr->value % 2 == 0) {
-      evens = curr;
-      in = in->next;
-      split(in, odds, evens->next);
-   }  
-
-   else if (curr->value % 2 != 0) {
-      odds = curr;
-      in = in->next;
-      split(in, odds->next, evens);
+   if (in->value % 2 == 0) {
+    evens = in;
+    in = in->next;
+    split(in, odds, evens->next);
    }
 
+   else if (in->value % 2 != 0) {
+    odds = in;
+    in = in->next;
+    split(in, odds->next, evens);
+   }
 }
 
 /* If you needed a helper function, write it here */
