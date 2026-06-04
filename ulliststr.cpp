@@ -134,25 +134,23 @@ std::string const & ULListStr::back() const
   return tail_->val[tail_->last - 1];
 }
 
-std::string* ULListStr::getValAtLoc(size_t loc) const
+std::string* ULListStr::getValAtLoc(size_t loc, Item* cur, bool start) const
 {
-  if (loc >= size_) {
+  if (start) {
+    if (loc >= size_) return NULL;
+    cur = head_;
+  }
+
+  if (cur == NULL) {
     return NULL;
   }
 
-  Item* cur = head_;
-  size_t index = loc;
-
-  while (cur != NULL) {
-    size_t count = cur->last - cur->first;
-    if (index < count) {
-      return &(cur->val[cur->first + index]);
-    }
-    index -= count;
-    cur = cur->next;
+  size_t count = cur->last - cur->first;
+  if (loc < count) {
+    return &(cur->val[cur->first + loc]);
   }
 
-  return NULL;
+  return getValAtLoc(loc - count, cur->next, false);
 }
 
 
@@ -166,15 +164,6 @@ void ULListStr::set(size_t loc, const std::string& val)
 }
 
 std::string& ULListStr::get(size_t loc)
-{
-  std::string* ptr = getValAtLoc(loc);
-  if(ptr == NULL){
-    throw std::invalid_argument("Bad location");
-  }
-  return *ptr;
-}
-
-std::string const & ULListStr::get(size_t loc) const
 {
   std::string* ptr = getValAtLoc(loc);
   if(ptr == NULL){

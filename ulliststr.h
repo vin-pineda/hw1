@@ -119,7 +119,7 @@ class ULListStr {
    *  if loc is valid and NULL otherwise
    *   - MUST RUN in O(n) 
    */
-  std::string* getValAtLoc(size_t loc) const;
+  std::string* getValAtLoc(size_t loc, Item* cur = NULL, bool start = true) const;
 
 
   /**
